@@ -1,1 +1,1 @@
-# WEC-BEM-Dynamics
+# 3D-BEM-WEC
