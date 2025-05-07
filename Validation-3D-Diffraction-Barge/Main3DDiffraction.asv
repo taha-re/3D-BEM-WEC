@@ -1,0 +1,211 @@
+%Main Program For Diffraction of a Square Barge in 3-Dimensions
+%By :: Taha Rezaei Abdolmaleki, Spring 2015
+%% Wave and Structure Constants
+%   g       :: Gravity Acceleration
+%   rho     :: Density of Sea Water
+%   Ka      :: Dimensional Wave Number (= K * a)
+%   a       :: Mesh Scale
+%   D_B,L_B
+%   ,B_B    :: Draft,Length and Beam of the Barge
+%   H_D,R_D :: Depth of the Sea,Radius of the Domain
+%   m_Body  :: Mass of the Body
+%   Wave    :: Struct Containing Characteristics of the Incident Wave
+%   Bottom  :: Indices of Panels which are located on Bottom face
+%   Lateral :: Indices of Panels which are located on Radius of the Doamin
+%   Body    :: Indices of Panels which are located on Body faces
+%   FS      :: Indices of Panels which are located on Free Surface
+%   VERTEX  :: the coordinates of each Vertex 
+%              --> VERTEX(i,:) = (x(i),y(i),z(i))
+%   EPV     :: number of vertices of each panel. Marking is done CCW.
+clc;
+clear all;
+
+global g;
+global rho;
+g = 9.8;
+rho = 1000;
+
+Ka = 1;
+a = 10;
+D_B = .5 * a;
+L_B = 2 * a;
+B_B = 2 * a;
+
+R_D = 5 * a;
+H_D = a;
+
+Wave = struct('Number',Ka / a,'Direction',0);
+Wave.Length = 2*pi/Wave.Number;
+Wave.Frequency = sqrt(g*Wave.Number*tanh(H_D*Wave.Number));
+Wave.K1 = Wave.Number * cos(Wave.Direction);
+Wave.K2 = Wave.Number * sin(Wave.Direction);
+Wave.Amplitude = .1;
+
+[ VERTEX,EPV,NoP,NoV,...
+    FS,Body,Bottom,Lateral ] = MeshPostProcessing(R_D,H_D);
+close;
+%% Computing Influence Coefficient Matrix
+%   M,L     :: Discrite Laplace Operators
+%              M = integrate(RG_Rn), L = integrate(G)
+%              (M + C) * Phi = L * dPhi_dn
+%   RCP     :: Position Vector of Collocation points for each Panel
+%   A_Panle :: Area of each Panel
+%   G,H     :: Influence Matrix (H * Phi = G * dPhi_dn)
+
+M = zeros(NoP,NoP);
+L = zeros(NoP,NoP);
+
+RCP = zeros(NoP,3);
+A_Panel = zeros(NoP,1);
+
+% Loop on Load (Node) Panel
+for ii=1:NoP
+    
+    V1 = VERTEX(EPV(ii,1),:);
+    V2 = VERTEX(EPV(ii,2),:);
+    V3 = VERTEX(EPV(ii,3),:);
+    V4 = VERTEX(EPV(ii,4),:);
+    Xp = (V1 + V2 + V3 +V4) ./ 4.0;
+    RCP(ii,:) = QuadCentroid( X1,X2,X3,X4 );
+    
+    A_Panel(ii) = AreaOfPanel( V1,V2,V3,V4 );
+    
+    % Loop on Feild (Node) Panel
+    for jj=1:NoP
+        
+        X1 = VERTEX(EPV(jj,1),:);
+        X2 = VERTEX(EPV(jj,2),:);
+        X3 = VERTEX(EPV(jj,3),:);
+        X4 = VERTEX(EPV(jj,4),:);
+        
+        if ( jj~=ii )
+            [ M(ii,jj),L(ii,jj) ] = MLRegularQuadElement( Xp,X1,X2,X3,X4 );
+        elseif ( jj==ii )
+            [ M(ii,jj),L(ii,jj) ] = MLSingularQuadElement( Xp,X1,X2,X3,X4 );
+        end
+        
+        fprintf('Load Panel: %f; Field Panel: %f\n',ii,jj);
+    
+    end
+    
+end
+
+% discrit form of integral equation :: H * Phi = G * dPhi_dn
+
+H = M + .5 .* eye(size(M,1));
+G = L;
+
+%% Computing normal Vectors "in" to the Surface of the Body
+%   n_B :: Normal Vector of Body Panels
+
+n_B = zeros(size(Body,1),3);
+
+for ii=1:size(Body,1)
+    
+    V1 = VERTEX(EPV(Body(ii),1),:);
+    V2 = VERTEX(EPV(Body(ii),2),:);
+    V4 = VERTEX(EPV(Body(ii),4),:);
+    
+    n_B(ii,:) = NormalOnPanel( V1,V2,V4 );
+    
+end
+
+%% Set Boundary Conditions
+%   BCINDEX :: Vector for Boundary Condition Index at each Panel
+%              1 = if Flux is Prescribed        (Neumann B.C.)
+%              0 = if Potential is Prescibed    (Drichlet B.C.)
+%              2 = if they have Linear relation (Newton B.C.)
+%   Phi     :: Constant Potential at each Panel
+%   dPhi_dn :: Constant Flux at each Panel
+%
+%   m,n     :: constant of Newton B.C. (dPhi_dn = m * Phi + n)
+%              4 = Free Surface; 3 = Lateral
+
+[ BCINDEX,Phi,dPhi_dn,m3,n3,m4,n4 ] = ...
+    DiffractionBC3D...
+    ( NoP,Bottom,Lateral,FS,Body,RCP,Wave,H_D,n_B);
+%% Solution of System of Equation
+%   A,B   :: LHS and RHS Matrices of System of equation (AX=B)
+%   sol   :: Solution Vector of the System (X)
+%   Phi_D :: Diffraction Potential on Body
+
+% Reordering LHS and RHS Matrices
+% All Knowns will be shifted to Right hand side and
+% All unKnowns to the Left Hand side
+
+A_Star = zeros(NoP,NoP); B_Star = zeros(NoP,NoP); C_Star = zeros(NoP,1);
+for ii=1:NoP
+    
+    if ( BCINDEX(ii)==1 ) % Prescribed Flux (dPhi_dn)
+        A_Star(:,ii) = H(:,ii);
+        C_Star(  ii) = dPhi_dn(ii);
+        B_Star(:,ii) = G(:,ii);
+    elseif ( BCINDEX(ii)==0 ); % Prescribed Potential (Phi)
+        A_Star(:,ii) = -G(:,ii);
+        C_Star(  ii) = Phi(ii);
+        B_Star(:,ii) = -H(:,ii);
+    elseif ( BCINDEX(ii)==2 )
+        
+        if (ismember(ii,FS))
+            A_Star(:,ii) = H(:,ii) - m4 .* G(:,ii);
+            C_Star(  ii) = n4;
+            B_Star(:,ii) = G(:,ii);
+        elseif (ismember(ii,Lateral))
+            A_Star(:,ii) = H(:,ii) - m3 .* G(:,ii);
+            C_Star(  ii) = n3;
+            B_Star(:,ii) = G(:,ii);
+        end
+        
+    end
+    
+end
+
+A = A_Star;
+B = B_Star * C_Star;
+
+sol = gmres(A,B,12,[],100);
+
+for ii=1:NoP
+    
+    if( BCINDEX(ii)==1 )
+        Phi(ii) = sol(ii);
+    elseif ( BCINDEX(ii)==0 )
+        dPhi_dn(ii) = sol(ii);
+    elseif ( BCINDEX(ii)==2 )
+        
+        if (ismember(ii,FS))
+            Phi(ii) = sol(ii);
+            dPhi_dn(ii) = m4 * Phi(ii) + n4;
+        elseif (ismember(ii,Lateral))
+            Phi(ii) = sol(ii);
+            dPhi_dn(ii) = m3 * Phi(ii) + n3;
+        end
+        
+    end
+    
+end
+
+Phi_D = Phi(Body);
+%% Computing Excitation Force
+
+Phi_S = Phi_D + LinearWavePotential( Wave,H_D,RCP(Body,1),RCP(Body,2),RCP(Body,3) );
+
+w = Wave.Frequency;
+N = zeros(3,size(Body,1),1);
+for ii=1:size(Body,1)
+    N(:,ii) = 1i .* rho .* w .* [n_B(ii,1);n_B(ii,2);n_B(ii,3)] .* A_Panel(Body(ii));
+end
+
+F_f = N * Phi_S;
+
+denum = rho * g * pi * a * Wave.Amplitude * L_B;
+
+F_f = F_f ./ denum;
+
+C_x = sqrt(real(F_f(1))^2 + imag(F_f(1))^2);
+C_y = sqrt(real(F_f(2))^2 + imag(F_f(2))^2);
+C_z = sqrt(real(F_f(3))^2 + imag(F_f(3))^2);
+
+fprintf('Non-Dimensional X-Force = %f\n',C_x);
+fprintf('Non-Dimensional Y-Force = %f\n',C_y);
+fprintf('Non-Dimensional Z-Force = %f\n',C_z);
