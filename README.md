@@ -3,15 +3,15 @@
 This repository hosts a 3D BEM solver for computing frequency-domain hydrodynamic coefficients (added mass, damping, excitation forces) of arbitrary 3D bodies interacting with waves. The solver is implemented in MATLAB and Simulink, with modules for both hydrodynamics and dynamics simulations.
 
 ## Features
-Hydrodynamics Solver: MATLAB scripts to solve radiation/diffraction problems using the boundary integral equation method.
-
-## Dynamics Modules:
+### Hydrodynamics Solver: 
+MATLAB scripts to solve radiation/diffraction problems using the boundary integral equation method.
+### Dynamics Modules:
 Simulink model for transient behavior simulation.
 Frequency-domain script for steady-state response analysis.
 
 ## Repository Structure
-├── /Radiation_Validation/      # Test cases for radiation problem  
-├── /Diffraction_Validation/    # Test cases for diffraction problem  
+├── /Validation-3D-Radiation-Cylinder/      # Test cases for radiation problem  
+├── /Validation-3D-Diffraction-Barge/    # Test cases for diffraction problem  
 └── (Under development)         # Additional documentation/examples to be added  
 
 ## Current Status
