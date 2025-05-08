@@ -26,4 +26,8 @@ Wave height (H) and period (T) are measured manually (graduated scale and timer)
 Tests covered 14 stroke lengths (6–29 cm) and motor speeds (10–50 RPM). Key metrics:
 ### Error Definitions:
 1-Wave height error:
-`E_H = (H_numerical - H_experimental) / H_experimental × 100%`
+E_H = \frac{H_{\text{num}} - H_{\text{exp}}}{H_{\text{exp}}} \times 100\%
+2-Period Error
+E_T = \frac{T_{\text{num}} - T_{\text{exp}}}{T_{\text{exp}}} \times 100\%
+3-Gain Error (Numerical vs. Analytical)
+E_{\text{Gain}} = \frac{(H/S)_{\text{num}} - (H/S)_{\text{analyt}}}}{(H/S)_{\text{analyt}}}} \times 100\%
