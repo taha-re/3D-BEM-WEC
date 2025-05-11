@@ -12,6 +12,7 @@ Frequency-domain script for steady-state response analysis.
 ## Repository Structure
 ├── /Validation-3D-Radiation-Cylinder/      # Test cases for radiation problem  
 ├── /Validation-3D-Diffraction-Barge/    # Test cases for diffraction problem  
+├── /Validation-Experimental-Wave-Tank/ # Experiment on a laboratry wave tank (Not included in JKU manuscript)  
 └── (Under development)         # Additional documentation/examples to be added  
 
 ## Current Status
