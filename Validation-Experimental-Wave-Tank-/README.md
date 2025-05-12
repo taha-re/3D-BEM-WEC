@@ -18,8 +18,8 @@ At a constant stroke, wave height grows with higher motor speeds—a trend obser
 Primary error sources include:  
 1. Experimental measurement uncertainties
 2. Minor fluid leakage around the wavemaker
-3. Imperfect wave absorption at the beach
-4. Scale effects when wavelengths approach flume dimensions
+3. Imperfect wave absorption at the baffle plate (wave damper)
+4. Scale effects when wavelengths approach tank dimensions
 5. Nonlinear effects (ignored in linear theory) become significant for steeper waves (ka > 0.048), contributing to deviations.
 
 ## Conclusion:
