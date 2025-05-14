@@ -1,6 +1,8 @@
 # 3D-BEM-WEC
 ## 3D Boundary Element Method (BEM) Solver for Wave Energy Converters
+<div align="justify">
 This repository hosts a 3D BEM solver for computing frequency-domain hydrodynamic coefficients (added mass, damping, excitation forces) of arbitrary 3D bodies interacting with waves. The solver is implemented in MATLAB and Simulink, with modules for both hydrodynamics and dynamics simulations.
+</div>
 
 ## Features
 ### Hydrodynamics Solver: 
