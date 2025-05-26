@@ -14,14 +14,13 @@ Frequency-domain script for steady-state response analysis.
 ## Repository Structure
 ├── /Validation-3D-Radiation-Cylinder/      # Test cases for radiation problem  
 ├── /Validation-3D-Diffraction-Barge/    # Test cases for diffraction problem  
-├── /Validation-Experimental-Wave-Tank/ # Experiments on a laboratry wave tank (Not included in JKU manuscript)  
+├── /Validation-Experimental-Wave-Tank/ # Experiments on a laboratry wave tank 
 └── (Under development)         # Additional documentation/examples to be added  
 
 ## Current Status
 ⚠️ Work in Progress: This repository is under active development. Future updates will include:  
 1- the Simulink model  
 2- a tutorial on how to run the code for arbitrary 3D geometry.  
-3- Link to the companion manuscript (currently under review at Journal of King Saud University - Engineering Sciences).
 
 ## Citation
 If this solver aids your research, please cite the associated manuscript once published. A DOI will be provided here upon acceptance.
