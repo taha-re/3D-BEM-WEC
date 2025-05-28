@@ -3,7 +3,7 @@
 <div align="justify">
 This repository hosts a 3D BEM solver for computing frequency-domain hydrodynamic coefficients (added mass, damping, excitation forces) of arbitrary 3D bodies interacting with waves. The solver is implemented in MATLAB and Simulink, with modules for both hydrodynamics and dynamics simulations.  
   
-by: Taha Rezaee, Research Associate at Center of Excellence in Design and Optimization of Energy Systems (CEDOES), School of Mechanical Engineering, College of Engineering, University of Tehran (rezaee.taha@ut.ac.ir)
+by: Taha Rezaee, PhD: Research Associate at the Center of Excellence in Design and Optimization of Energy Systems (CEDOES), School of Mechanical Engineering, College of Engineering, University of Tehran (rezaee.taha@ut.ac.ir)
 </div>
 
 ## Features
