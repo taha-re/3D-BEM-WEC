@@ -73,4 +73,10 @@ where M is the mass of the body, A is the hydrodynamic added mass coefficient, K
 This equation is called the Cummins equation [1].
 
 ## Determination of the Coefficients in the Cummins Equation
-(under construction)
+<div align="justify">
+The linear hydrostatic restoring stiffness coefficient, G, can be easily calculated from the underwater geometry of the body. To determine the coefficients A and K(t), the velocity potentials Ψ and χ must be computed. A direct approach to this calculation would be highly complex. A simpler method for determining these coefficients was proposed by Ogilvie [2]. He utilized hydrodynamic added mass and damping data, computed by frequency-domain potential flow software, to express the required coefficients A and K(t) in terms of the calculated hydrodynamic mass and damping data. The Ogilvie procedure is described below.
+Assume the body undergoes harmonic oscillation with unit amplitude:
+</div> 
+
+![10](https://github.com/taha-re/3D-BEM-WEC/blob/main/Simulink-Model/figures/10.PNG)
+
