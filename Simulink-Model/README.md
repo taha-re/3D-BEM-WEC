@@ -78,5 +78,39 @@ The linear hydrostatic restoring stiffness coefficient, G, can be easily calcula
 Assume the body undergoes harmonic oscillation with unit amplitude:
 </div> 
 
-![10](https://github.com/taha-re/3D-BEM-WEC/blob/main/Simulink-Model/figures/10.PNG)
+![12](https://github.com/taha-re/3D-BEM-WEC/blob/main/Simulink-Model/figures/12.PNG)
 
+Substituting this into the Cummins equation yields:
+
+![13](https://github.com/taha-re/3D-BEM-WEC/blob/main/Simulink-Model/figures/13.PNG)
+
+Rewriting this equation results in:
+
+![14](https://github.com/taha-re/3D-BEM-WEC/blob/main/Simulink-Model/figures/14.PNG)
+
+Now, recalling the frequency-domain representation of this motion:
+
+![15](https://github.com/taha-re/3D-BEM-WEC/blob/main/Simulink-Model/figures/15.PNG)
+
+<div align="justify">
+where a(ω) is the frequency-dependent hydrodynamic added mass coefficient and b(ω) is the frequency-dependent hydrodynamic damping coefficient.  
+By comparing the frequency-domain and time-domain (cummins) equations, we conclude that:
+</div> 
+
+![16](https://github.com/taha-re/3D-BEM-WEC/blob/main/Simulink-Model/figures/16.PNG)
+
+To obtain the retardation function, the inverse Fourier transform is applied:
+
+![17](https://github.com/taha-re/3D-BEM-WEC/blob/main/Simulink-Model/figures/17.PNG)
+
+For the mass term, we have:
+
+![18](https://github.com/taha-re/3D-BEM-WEC/blob/main/Simulink-Model/figures/18.PNG)
+
+This relationship holds for any value of ω, including ω=∞. Therefore:
+
+![19](https://github.com/taha-re/3D-BEM-WEC/blob/main/Simulink-Model/figures/19.PNG)
+
+<div align="justify">
+Based on this relation, A is typically referred to as the infinite-frequency added mass and denoted by A∞ .
+</div> 
