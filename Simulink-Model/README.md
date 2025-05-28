@@ -56,5 +56,21 @@ Now by defining:
 
 The hydrodynamic force can then be expressed as:
 
+![11](https://github.com/taha-re/3D-BEM-WEC/blob/main/Simulink-Model/figures/11.PNG)
+
+<div align="justify">
+By adding a linear restoring spring term G⋅x and an external linear load X(t), Newton's second law yields the linear time-domain equation of motion:
+</div> 
+
 ![9](https://github.com/taha-re/3D-BEM-WEC/blob/main/Simulink-Model/figures/9.PNG)
 
+<div align="justify">
+where M is the mass of the body, A is the hydrodynamic added mass coefficient, K(t) is the retardation function, G is the geometric stiffness coefficient, and X(t) is the external load. Now, by changing variables and adjusting the integration limits, we rewrite this equation as:
+</div> 
+
+![10](https://github.com/taha-re/3D-BEM-WEC/blob/main/Simulink-Model/figures/10.PNG)
+
+This equation is called the Cummins equation [1].
+
+## Determination of the Coefficients in the Cummins Equation
+(under construction)
