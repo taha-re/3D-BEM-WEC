@@ -1,6 +1,7 @@
 # 🔬 3D-BEM-WEC: 3D Boundary Element Method Solver for Wave Energy Converters
 
-**A comprehensive 3D BEM solver for computing frequency-domain hydrodynamic coefficients of arbitrary 3D bodies interacting with waves**
+> **A comprehensive 3D BEM solver for computing frequency-domain hydrodynamic coefficients of arbitrary 3D bodies interacting with waves**
+
 ---
 
 ## 👨‍🔬 Author Information
