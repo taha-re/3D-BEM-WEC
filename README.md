@@ -1,12 +1,20 @@
-# 3D-BEM-WEC: 3D Boundary Element Method Solver for Wave Energy Converters
+# 🔬 3D-BEM-WEC: 3D Boundary Element Method Solver for Wave Energy Converters
 
+**A comprehensive 3D BEM solver for computing frequency-domain hydrodynamic coefficients of arbitrary 3D bodies interacting with waves**
+---
+
+## 👨‍🔬 Author Information
+
+**Taha Reza**  
+📧 **Email:** [rezaee.taha@gmail.com](mailto:rezaee.taha@gmail.com)   |  🔬 **ORCID:** [![ORCID](https://img.shields.io/badge/ORCID-A6CE39?logo=orcid&logoColor=white)](https://orcid.org/0009-0008-6807-0765)
+
+---
 <div align="center">
 
 ![Wave Energy](https://img.shields.io/badge/Wave-Energy-blue?style=for-the-badge&logo=wave&logoColor=white)
 ![MATLAB](https://img.shields.io/badge/MATLAB-Expert-orange?style=for-the-badge&logo=matlab)
 ![Hydrodynamics](https://img.shields.io/badge/Hydrodynamics-Solver-009688?style=for-the-badge)
-
-**A comprehensive 3D BEM solver for computing frequency-domain hydrodynamic coefficients of arbitrary 3D bodies interacting with waves**
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 </div>
 
@@ -16,8 +24,6 @@
 
 This repository hosts a sophisticated 3D Boundary Element Method (BEM) solver designed for computing frequency-domain hydrodynamic coefficients—including **added mass**, **radiation damping**, and **wave excitation forces**—of arbitrary three-dimensional bodies interacting with ocean waves. The solver is implemented in **MATLAB** and **Simulink**, featuring comprehensive modules for both hydrodynamics analysis and dynamics simulations.
 
-**Developer**: Taha Rezaee, PhD • University of Tehran  
-**Contact**: [rezaee.taha@gmail.com](mailto:rezaee.taha@gmail.com); [rezaee.taha@ut.ac.ir](mailto:rezaee.taha@ut.ac.ir)
 
 </div>
 
