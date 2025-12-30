@@ -77,10 +77,11 @@ The solver includes extensive validation through:
 
 ## 📚 Citation
 
-If this solver contributes to your research, please cite the associated manuscript once published. A DOI will be provided here upon acceptance.
+If this solver contributes to your research, please cite the associated manuscript as:
 
 ```bibtex
-% Citation details to be updated upon publication
+Rezaee, T. Boundary integral solver for wave energy converter hydrodynamics. Discov Energy 5, 40 (2025). 
+https://doi.org/10.1007/s43937-025-00106-3
 ```
 
 ---
