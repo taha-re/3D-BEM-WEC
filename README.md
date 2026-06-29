@@ -28,6 +28,15 @@ This repository hosts a sophisticated 3D Boundary Element Method (BEM) solver de
 
 </div>
 
+## 🎯 Featured Publications
+
+This code has been used in the following scientific publications:
+
+**Rezaee, T.** (2025) Boundary integral solver for wave energy converter hydrodynamics. Discov Energy 5, 40.
+
+(https://doi.org/10.1007/s43937-025-00106-3)
+
+
 ## ✨ Key Features
 
 ### 🌊 Hydrodynamics Solver
