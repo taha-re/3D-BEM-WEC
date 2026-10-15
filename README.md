@@ -72,7 +72,7 @@ This repository hosts a sophisticated 3D Boundary Element Method (BEM) solver de
 ├── 📁 Simulink-Model/                     # (Under development) Transient dynamics theory and model files
 ├── 📁 Validation-3D-Radiation-Cylinder/   # Test cases for radiation problem validation
 ├── 📁 Validation-3D-Diffraction-Barge/    # Test cases for diffraction problem validation  
-├── 📁 Validation-Experimental-Wave-Tank/  # Laboratory wave tank experiments
+├── 📁 Validation-Experimental-Wave-Tank/  # Laboratory wave tank experiments (Hidden to avoid COI)
 └── 📁 Documentation/                      # (Under development) Additional documentation & examples
 ```
 
